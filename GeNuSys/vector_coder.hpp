@@ -12,13 +12,18 @@ namespace GeNuSys
             unsigned long long code = 0;
             for (int j = z.getLength() - 1; j > 0; --j)
             {
-                if (lowerBound[j] > ElementTraits<ElementType>::template asTypeUnsafe<long long>(z[j])
-                        || ElementTraits<ElementType>::template asTypeUnsafe<long long>(z[j]) > upperBound[j])
+                if ((lowerBound[j] > ElementTraits<ElementType>::template asTypeUnsafe<long long>(z[j]))
+                        || (ElementTraits<ElementType>::template asTypeUnsafe<long long>(z[j]) > upperBound[j]))
                 {
                     valid = false;
                 }
                 code += ElementTraits<ElementType>::template asTypeUnsafe<long long>(z[j]) - lowerBound[j];
                 code *= varBase[j - 1];
+            }
+            if ((lowerBound[0] > ElementTraits<ElementType>::template asTypeUnsafe<long long>(z[0]))
+                    || (ElementTraits<ElementType>::template asTypeUnsafe<long long>(z[0]) > upperBound[0]))
+            {
+                valid = false;
             }
             code += ElementTraits<ElementType>::template asTypeUnsafe<long long>(z[0]) - lowerBound[0];
 
