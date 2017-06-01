@@ -34,6 +34,7 @@ namespace GeNuSys
             template<typename ElementType, typename Norm>
             static std::vector<GeNuSys::LinAlg::Vector<ElementType>> getDigitSet(const RadixProperties<ElementType>& props, const Norm& norm, bool global);
 
+            /*
             template<typename ElementType>
             static std::vector<GeNuSys::LinAlg::Vector<ElementType>> readDigitSet()
             {
@@ -53,6 +54,7 @@ namespace GeNuSys
                 }
                 return digits;
             }
+            */
 
         };
 
