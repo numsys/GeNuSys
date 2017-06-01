@@ -1,33 +1,29 @@
 #include <iostream>
-#include <stdlib.h>
-#include <time.h>
+#include <cstdlib>
+#include <ctime>
 
-#include "element_traits.h"
+#include <GeNuSys/element_traits.h>
 
-#include "vector.h"
-#include "sparse_vector.h"
-#include "matrix.h"
-#include "sparse_matrix.h"
+#include <GeNuSys/vector.h>
+#include <GeNuSys/sparse_vector.h>
+#include <GeNuSys/matrix.h>
+#include <GeNuSys/sparse_matrix.h>
 
-#include "p_norm.h"
-#include "frobenius_norm.h"
-#include "operator_norm.h"
+#include <GeNuSys/p_norm.h>
+#include <GeNuSys/frobenius_norm.h>
+#include <GeNuSys/operator_norm.h>
 
-#include "linalg_algorithms.h"
+#include <GeNuSys/linalg_algorithms.h>
 
-#include "polynomial.h"
-#include "lehmer_schur.h"
+#include <GeNuSys/polynomial.h>
+#include <GeNuSys/lehmer_schur.h>
 
-#include "test_suite.h"
-#include "test_runner.h"
-#include "tests.h"
-
-#include "number_system.h"
-#include "radix_properties.h"
-#include "digit_set.h"
-#include "smith_hash.h"
-#include "numsys_traits.h"
-#include "simultan.h"
+#include <GeNuSys/number_system.h>
+#include <GeNuSys/radix_properties.h>
+#include <GeNuSys/digit_set.h>
+#include <GeNuSys/smith_hash.h>
+#include <GeNuSys/numsys_traits.h>
+#include <GeNuSys/simultan.h>
 
 GeNuSys::LinAlg::Matrix<int> randomMatrix(unsigned int rows, unsigned int cols, unsigned int range)
 {
@@ -50,23 +46,6 @@ GeNuSys::LinAlg::Vector<int> randomVec(unsigned int length, unsigned int range)
         result.set(i, rand() % (2 * range + 1) - range);
     }
     return result;
-}
-
-int runTests()
-{
-    GeNuSys::Tests::TestRunner testRunner;
-    testRunner.addTestSuite(new VectorTest());
-    testRunner.addTestSuite(new SparseVectorTest());
-    testRunner.addTestSuite(new VectorCmpTest());
-    testRunner.addTestSuite(new SparseVectorCmpTest());
-    testRunner.addTestSuite(new VectorOperatorTest());
-    testRunner.addTestSuite(new SparseVectorOperatorTest());
-    testRunner.addTestSuite(new VectorNormTest());
-    testRunner.addTestSuite(new MatrixTest());
-    testRunner.addTestSuite(new MatrixNormTest());
-    testRunner.run();
-
-    return testRunner.returnCode();
 }
 
 template<typename ElementType2>
@@ -245,6 +224,7 @@ void exampleNumSys(const GeNuSys::LinAlg::Matrix<ElementType2>& mat)
     GeNuSys::LinAlg::OperatorNorm<typename GeNuSys::ElementTraits<ElementType2>::RationalType>
     > numSys(props, dds, props.getOperatorNorm());
     std::cout << "NUMSYS CREATED!" << std::endl;
+    std::cout << "Volume: " << GeNuSys::NumSys::Traits::getVolume(props.getInverse(), dds) << std::endl;
     clock_t tStart = clock();
 
     // GeNuSys::NumSys::BitVector bitVec(16000000000L);
@@ -398,13 +378,13 @@ int main()
     cnsMat.set(0, 10, -2);
     cnsMat.set(1, 10, 1);
 
-    GeNuSys::LinAlg::Matrix<int> cnsMatSmall(9, 9);
-    for (unsigned int i = 1; i < 9; ++i)
+    GeNuSys::LinAlg::Matrix<int> cnsMatSmall(4, 4);
+    for (unsigned int i = 1; i < 4; ++i)
     {
         cnsMatSmall.set(i, i - 1, 1);
     }
-    cnsMatSmall.set(0, 8, -2);
-    cnsMatSmall.set(1, 8, 1);
+    cnsMatSmall.set(0, 3, -2);
+    cnsMatSmall.set(1, 3, 1);
 
     GeNuSys::LinAlg::Matrix<int> cnsMat2(8, 8);
     for (unsigned int i = 1; i < 8; ++i)
@@ -452,84 +432,72 @@ int main()
     jordanMat.set(5, 4, -2);
     jordanMat.set(5, 5, 7);
 
+    exampleJordanForm(jordanMat);
 
-
-    //exampleJordanForm(jordanMat);
-
-
-
-    int testsResult = runTests();
-
-    // exampleSimultan(0, -1);
-    // exampleSimultan(-1, 0);
-    // exampleSimultan(-1, -1);
+    /*
+    exampleSimultan(0, -1, false);
+    exampleSimultan(-1, 0, false);
+    exampleSimultan(-1, -1, false);
+    */
 
     //int i, j;
     //std::cin >> i;
     //std::cin >> j;
-    //  exampleNumSys(GeNuSys::NumSys::Simultan::getSimultan(2,1));
+    exampleNumSys(GeNuSys::NumSys::Simultan::getSimultan(2, 1));
     exampleSimultan(2, 1, false);
     exampleSimultan(2, 1, true);
 
     /*
-    exampleSimultan(0, 1);
-    exampleSimultan(1, 1);
-    exampleSimultan(2, 0);
-    exampleSimultan(2, 1);
-    exampleSimultan(2, 2);
-    exampleSimultan(1, 2);
-    exampleSimultan(0, 2);
-    */
-    /*
+    exampleSimultan(0, 1, false);
+    exampleSimultan(1, 1, false);
+    exampleSimultan(2, 0, false);
+    exampleSimultan(2, 1, false);
+    exampleSimultan(2, 2, false);
+    exampleSimultan(1, 2, false);
+    exampleSimultan(0, 2, false);
+
     for (int i = -3; i <= 3; ++i) {
         for (int j = -3; j <= 3; ++j) {
-            exampleSimultan(i, j);
+            exampleSimultan(i, j, false);
         }
     }
     */
 
-    //exampleNumSys(cnsMat);
+    exampleNumSys(cnsMatSmall);
 
-    /*
     exampleSmithNormalForm(smithMat);
-    exampleDecomposeQR<int>(randomMatrix(5, 5, 10));
-    exampleDecomposeLU<int>(randomMatrix(5, 5, 10));
+    //exampleDecomposeQR<int>(randomMatrix(5, 5, 10));
+    //exampleDecomposeLU<int>(randomMatrix(5, 5, 10));
     exampleHessenbergForm<int>(cnsMat);
     exampleSchurForm<int>(cnsMat);
     exampleSchurForm<double>(GeNuSys::LinAlg::Algorithms::invert(cnsMat));
 
+    exampleSchurForm<long long>(jordanMat);
 
-    //exampleSchurForm<long long>(jordanMat);
+    //for (unsigned int i = 0; i < 10; ++i) {
+    //    exampleSchurForm<long long>(randomMatrix(40, 40, 10));
+    //}
 
-    for (unsigned int i = 0; i < 10; ++i) {
-        exampleSchurForm<long long>(randomMatrix(40, 40, 10));
-    }
-    */
+    //GeNuSys::LinAlg::Matrix<double> invM = GeNuSys::LinAlg::Algorithms::invert(cnsMat);
+    //GeNuSys::LinAlg::OperatorNorm<double> opNorm(invM);
 
-    /*
-    GeNuSys::LinAlg::Matrix<double> invM = GeNuSys::LinAlg::Algorithms::invert(cnsMat);
-    GeNuSys::LinAlg::OperatorNorm<double> opNorm(invM);
-
-    std::cout << opNorm.norm(invM) << std::endl;
-    */
+    //std::cout << opNorm.norm(invM) << std::endl;
 
     /*
     GeNuSys::NumSys::SmithHash<int, GeNuSys::LinAlg::Matrix> hash(GeNuSys::LinAlg::Algorithms::getSmithNormalForm(cnsMat));
 
-    // std::cout << GeNuSys::LinAlg::OperatorNorm<double>::norm(GeNuSys::LinAlg::Algorithms::invert(cnsMat)) << std::endl;
+    std::cout << GeNuSys::LinAlg::OperatorNorm<double>::norm(GeNuSys::LinAlg::Algorithms::invert(cnsMat)) << std::endl;
 
     GeNuSys::LinAlg::Matrix<double> invM = GeNuSys::LinAlg::Algorithms::invert(cnsMat);
+    */
 
-    // std::cout << invM << std::endl;
+    //std::cout << invM << std::endl;
 
-    // std::cout << invM * GeNuSys::LinAlg::Matrix<double>(cnsMat) << std::endl;
-
-    std::cout << GeNuSys::LinAlg::OperatorNorm<double>::norm(invM) << std::endl;
+    //std::cout << invM * GeNuSys::LinAlg::Matrix<double>(cnsMat) << std::endl;
 
     std::complex<double> a(2.0, 0.0);
     double dd = 2.00001;
     GeNuSys::ElementTraits<double>::asTypeUnsafe<int>(dd);
-    */
 
-    return testsResult;
+    return 0;
 }

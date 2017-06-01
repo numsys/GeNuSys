@@ -1,12 +1,12 @@
 #ifndef GENUSYS_TESTS_TEST_UTILS_H_
 #define GENUSYS_TESTS_TEST_UTILS_H_
 
-#include "element_traits.h"
+#include <GeNuSys/element_traits.h>
 
-#include "vector.h"
-#include "sparse_vector.h"
-#include "matrix.h"
-#include "sparse_matrix.h"
+#include <GeNuSys/vector.h>
+#include <GeNuSys/sparse_vector.h>
+#include <GeNuSys/matrix.h>
+#include <GeNuSys/sparse_matrix.h>
 
 namespace GeNuSys
 {

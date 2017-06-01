@@ -1,16 +1,16 @@
 #include "test_suite.h"
 #include "test_utils.h"
 
-#include "element_traits.h"
+#include <GeNuSys/element_traits.h>
 
-#include "vector.h"
-#include "sparse_vector.h"
-#include "matrix.h"
-#include "sparse_matrix.h"
+#include <GeNuSys/vector.h>
+#include <GeNuSys/sparse_vector.h>
+#include <GeNuSys/matrix.h>
+#include <GeNuSys/sparse_matrix.h>
 
-#include "p_norm.h"
-#include "frobenius_norm.h"
-#include "operator_norm.h"
+#include <GeNuSys/p_norm.h>
+#include <GeNuSys/frobenius_norm.h>
+#include <GeNuSys/operator_norm.h>
 
 class VectorTest : public GeNuSys::Tests::TestSuite
 {
