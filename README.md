@@ -24,7 +24,9 @@ Requirements
 Examples and documentation
 -------------
 For code examples, see the [examples](examples) subdirectory, and especially [examples/example0.cpp](examples/example0.cpp).
-Automatically generated source code reference/overview: [doxygen/html/index.html](doxygen/html/index.html).
+
+Automatically generated source code reference/overview: [doxygen/html](doxygen/html).
+
 Mathematical background and description of algorithms:
 * [Burcsi, P.: Algorithmic aspects of generalized number systems. Eötvös Loránd Tudományegyetem, Budapest, Ph.D. dissertation, 2008, 1–56.](http://www.tnkcs.inf.elte.hu/vedes/Burcsi_Peter_Tezisek_en.pdf)
 * [Kovács, A.: Radix expansion in lattices. Eötvös Loránd Tudományegyetem, Budapest, Ph.D.
