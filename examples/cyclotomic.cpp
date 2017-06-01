@@ -109,7 +109,6 @@ int main()
                 continue;
             }
             std::cout << "Creating number system object..." << std::endl;
-            GeNuSys::NumSys::NumberSystem<long long, GeNuSys::LinAlg::SparseVector, GeNuSys::LinAlg::Matrix, GeNuSys::LinAlg::OperatorNorm<typename GeNuSys::ElementTraits<long long>::RationalType>> numSys(props, sds, props.getOperatorNorm());
             std::cout << "Volume:" << GeNuSys::NumSys::Traits::getVolume(props.getInverse(), sds) << std::endl;
             GeNuSys::LinAlg::Matrix<long long> T = GeNuSys::NumSys::Traits::findBasisTransformation(props.getInverse(), sds, 15, 5, 2);
             auto imprM = T * mat.second * GeNuSys::LinAlg::Traits::template convertUnsafe<typename GeNuSys::ElementTraits<long long int>::RationalType, long long>(GeNuSys::LinAlg::Algorithms::invert(T));
@@ -120,6 +119,7 @@ int main()
             }
             GeNuSys::NumSys::RadixProperties<long long> imprProps(imprM);
             std::cout << "Reduced volume:" << GeNuSys::NumSys::Traits::getVolume(imprProps.getInverse(), imprDigits) << std::endl;
+            GeNuSys::NumSys::NumberSystem<long long, GeNuSys::LinAlg::SparseVector, GeNuSys::LinAlg::Matrix, GeNuSys::LinAlg::OperatorNorm<typename GeNuSys::ElementTraits<long long>::RationalType>> numSys(imprProps, imprDigits, imprProps.getOperatorNorm());
             auto cycles = numSys.getCycles();
             for (unsigned int i = 0; i < cycles.size(); ++i)
             {

@@ -18,6 +18,10 @@ tests/test_suite.cpp
 tests/main.cpp
 )
 
+set(example0_SRCS
+examples/example0.cpp
+)
+
 set(example1_SRCS
 examples/example1.cpp
 )
@@ -28,9 +32,11 @@ examples/cyclotomic.cpp
 
 add_definitions(-std=c++11 -Wall -Wextra -Woverloaded-virtual -pedantic -rdynamic)
 
+add_executable(GeNuSys-example0 ${example0_SRCS})
 add_executable(GeNuSys-example1 ${example1_SRCS})
 add_executable(GeNuSys-tests ${test_SRCS})
 add_executable(GeNuSys-cyclotomic ${cyclotomic_SRCS})
+target_link_libraries(GeNuSys-example0 ${GMP_LIBRARIES})
 target_link_libraries(GeNuSys-example1 ${GMP_LIBRARIES})
 target_link_libraries(GeNuSys-tests ${GMP_LIBRARIES})
 target_link_libraries(GeNuSys-cyclotomic ${GMP_LIBRARIES})
