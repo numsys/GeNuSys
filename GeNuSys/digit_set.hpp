@@ -103,7 +103,7 @@ namespace GeNuSys
 
                     for (unsigned int j = 0; j < v.getLength(); ++j)
                     {
-                        ElementType start = v[i];
+                        ElementType start = v[j];
 
                         typename GeNuSys::LinAlg::OperatorNorm<ElementType>::template NormType<ElementType>::Type actNorm;
                         typename GeNuSys::LinAlg::OperatorNorm<ElementType>::template NormType<ElementType>::Type nextNorm = norm.norm(v);
@@ -111,23 +111,23 @@ namespace GeNuSys
                         do
                         {
                             actNorm = nextNorm;
-                            v.set(i, v[i] + t);
+                            v.set(j, v[j] + t);
                             nextNorm = norm.norm(v);
                         }
                         while (nextNorm < actNorm);
-                        v.set(i, v[i] - t);
+                        v.set(j, v[j] - t);
                         nextNorm = norm.norm(v);
 
                         do
                         {
                             actNorm = nextNorm;
-                            v.set(i, v[i] - t);
+                            v.set(j, v[j] - t);
                             nextNorm = norm.norm(v);
                         }
                         while (nextNorm < actNorm);
-                        v.set(i, v[i] + t);
+                        v.set(j, v[j] + t);
 
-                        if (v[i] != start)
+                        if (v[j] != start)
                         {
                             flag = true;
                         }
