@@ -23,7 +23,7 @@
 #include <GeNuSys/digit_set.h>
 #include <GeNuSys/smith_hash.h>
 #include <GeNuSys/numsys_traits.h>
-#include <GeNuSys/simultan.h>
+#include <GeNuSys/simultaneous.h>
 
 GeNuSys::LinAlg::Matrix<int> randomMatrix(unsigned int rows, unsigned int cols, unsigned int range)
 {
@@ -242,13 +242,13 @@ void exampleNumSys(const GeNuSys::LinAlg::Matrix<ElementType2>& mat)
     printf("Time taken: %.2fs\n", (double)(clock() - tStart) / CLOCKS_PER_SEC);
 }
 
-void exampleSimultan(const int i, const int j, bool impr)
+void exampleSimultaneous(const int i, const int j, bool impr)
 {
-    GeNuSys::LinAlg::Matrix<int> M = GeNuSys::NumSys::Simultan::getSimultan(i, j);
+    GeNuSys::LinAlg::Matrix<int> M = GeNuSys::NumSys::Simultaneous::getSimultaneous(i, j);
 
     std::cout << "===============================" << std::endl;
 
-    std::cout << "SIMULTAN (" << i << ", " << j << ")" << std::endl;
+    std::cout << "SIMULTANEOUS (" << i << ", " << j << ")" << std::endl;
 
     std::cout << "M = " << M << std::endl;
 
@@ -269,7 +269,7 @@ void exampleSimultan(const int i, const int j, bool impr)
     }
 
 
-    std::vector<GeNuSys::LinAlg::Vector<int>> digits = GeNuSys::NumSys::Simultan::/*readDigitSet(); */getDigitSet(props,/* props.getOperatorNorm()*/GeNuSys::LinAlg::PNorm<2>(), true);
+    std::vector<GeNuSys::LinAlg::Vector<int>> digits = GeNuSys::NumSys::Simultaneous::/*readDigitSet(); */getDigitSet(props,/* props.getOperatorNorm()*/GeNuSys::LinAlg::PNorm<2>(), true);
 
     GeNuSys::LinAlg::Matrix<int> imprM;
     std::vector<GeNuSys::LinAlg::Vector<int>> imprDigits;
@@ -435,30 +435,30 @@ int main()
     exampleJordanForm(jordanMat);
 
     /*
-    exampleSimultan(0, -1, false);
-    exampleSimultan(-1, 0, false);
-    exampleSimultan(-1, -1, false);
+    exampleSimultaneous(0, -1, false);
+    exampleSimultaneous(-1, 0, false);
+    exampleSimultaneous(-1, -1, false);
     */
 
     //int i, j;
     //std::cin >> i;
     //std::cin >> j;
-    exampleNumSys(GeNuSys::NumSys::Simultan::getSimultan(2, 1));
-    exampleSimultan(2, 1, false);
-    exampleSimultan(2, 1, true);
+    exampleNumSys(GeNuSys::NumSys::Simultaneous::getSimultaneous(2, 1));
+    exampleSimultaneous(2, 1, false);
+    exampleSimultaneous(2, 1, true);
 
     /*
-    exampleSimultan(0, 1, false);
-    exampleSimultan(1, 1, false);
-    exampleSimultan(2, 0, false);
-    exampleSimultan(2, 1, false);
-    exampleSimultan(2, 2, false);
-    exampleSimultan(1, 2, false);
-    exampleSimultan(0, 2, false);
+    exampleSimultaneous(0, 1, false);
+    exampleSimultaneous(1, 1, false);
+    exampleSimultaneous(2, 0, false);
+    exampleSimultaneous(2, 1, false);
+    exampleSimultaneous(2, 2, false);
+    exampleSimultaneous(1, 2, false);
+    exampleSimultaneous(0, 2, false);
 
     for (int i = -3; i <= 3; ++i) {
         for (int j = -3; j <= 3; ++j) {
-            exampleSimultan(i, j, false);
+            exampleSimultaneous(i, j, false);
         }
     }
     */

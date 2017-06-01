@@ -1,5 +1,5 @@
-#ifndef GENUSYS_NUMSYS_SIMULTAN_H_
-#define GENUSYS_NUMSYS_SIMULTAN_H_
+#ifndef GENUSYS_NUMSYS_SIMULTANEOUS_H_
+#define GENUSYS_NUMSYS_SIMULTANEOUS_H_
 
 #include <vector>
 
@@ -18,11 +18,11 @@ namespace GeNuSys
     namespace NumSys
     {
 
-        struct Simultan
+        struct Simultaneous
         {
 
             template<typename ElementType>
-            static GeNuSys::LinAlg::Matrix<ElementType> getSimultan(ElementType a, ElementType b);
+            static GeNuSys::LinAlg::Matrix<ElementType> getSimultaneous(ElementType a, ElementType b);
 
             template<typename ElementType, typename Norm>
             static void tryDigitCandidate(const ElementType i, const ElementType j, GeNuSys::LinAlg::Vector<ElementType>& vct,
@@ -59,6 +59,6 @@ namespace GeNuSys
     }
 }
 
-#include "simultan.hpp"
+#include "simultaneous.hpp"
 
-#endif // GENUSYS_NUMSYS_SIMULTAN_H_
+#endif // GENUSYS_NUMSYS_SIMULTANEOUS_H_

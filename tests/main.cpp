@@ -27,7 +27,7 @@
 #include <GeNuSys/digit_set.h>
 #include <GeNuSys/smith_hash.h>
 #include <GeNuSys/numsys_traits.h>
-#include <GeNuSys/simultan.h>
+#include <GeNuSys/simultaneous.h>
 
 int runTests()
 {

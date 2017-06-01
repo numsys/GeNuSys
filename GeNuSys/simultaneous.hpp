@@ -4,30 +4,30 @@ namespace GeNuSys
     {
 
         template<typename ElementType>
-        GeNuSys::LinAlg::Matrix<ElementType> Simultan::getSimultan(ElementType a, ElementType b)
+        GeNuSys::LinAlg::Matrix<ElementType> Simultaneous::getSimultaneous(ElementType a, ElementType b)
         {
-            GeNuSys::LinAlg::Matrix<ElementType> simultan(6, 6);
+            GeNuSys::LinAlg::Matrix<ElementType> simultaneous(6, 6);
 
-            simultan.set(0, 0, a);
-            simultan.set(0, 1, -b);
-            simultan.set(1, 0, b);
-            simultan.set(1, 1, a - b);
+            simultaneous.set(0, 0, a);
+            simultaneous.set(0, 1, -b);
+            simultaneous.set(1, 0, b);
+            simultaneous.set(1, 1, a - b);
 
-            simultan.set(2, 2, a + 1);
-            simultan.set(2, 3, -b);
-            simultan.set(3, 2, b);
-            simultan.set(3, 3, a - b + 1);
+            simultaneous.set(2, 2, a + 1);
+            simultaneous.set(2, 3, -b);
+            simultaneous.set(3, 2, b);
+            simultaneous.set(3, 3, a - b + 1);
 
-            simultan.set(4, 4, a + 1);
-            simultan.set(4, 5, -b - 1);
-            simultan.set(5, 4, b + 1);
-            simultan.set(5, 5, a - b);
+            simultaneous.set(4, 4, a + 1);
+            simultaneous.set(4, 5, -b - 1);
+            simultaneous.set(5, 4, b + 1);
+            simultaneous.set(5, 5, a - b);
 
-            return simultan;
+            return simultaneous;
         }
 
         template<typename ElementType, typename Norm>
-        void Simultan::tryDigitCandidate(
+        void Simultaneous::tryDigitCandidate(
             const ElementType i, const ElementType j, GeNuSys::LinAlg::Vector<ElementType>& vct,
             std::vector<bool>& digitFound, std::vector<typename Norm::template NormType<ElementType>::Type>& digitNorm, std::vector<GeNuSys::LinAlg::Vector<ElementType>>& digits,
             int& numFound,
@@ -74,7 +74,7 @@ namespace GeNuSys
         }
 
         template<typename ElementType, typename Norm>
-        std::vector<GeNuSys::LinAlg::Vector<ElementType>> Simultan::getDigitSet(const RadixProperties<ElementType>& props, const Norm& norm, bool global)
+        std::vector<GeNuSys::LinAlg::Vector<ElementType>> Simultaneous::getDigitSet(const RadixProperties<ElementType>& props, const Norm& norm, bool global)
         {
             typedef typename Norm::template NormType<ElementType>::Type NormType;
 
