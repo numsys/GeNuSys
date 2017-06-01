@@ -3,6 +3,9 @@
 #include "bit_vector.h"
 #include "vector_coder.h"
 
+//#include <thread>
+//#include <mutex>
+
 namespace GeNuSys
 {
     namespace NumSys
@@ -129,15 +132,87 @@ namespace GeNuSys
 
             BitVector touched(coder.getSize());
             std::vector<unsigned long long> path;
+            unsigned long long coderSize = coder.getSize();
 
-            for (unsigned long long i = 0; i < coder.getSize(); ++i)
+            //std::vector<std::thread> workers;
+            //uint32_t threadCount = 4;
+            //unsigned long long threadSize = coderSize/threadCount;
+            //std::mutex result_mut;
+/*
+            for(uint32_t m = 0; m < threadCount; ++m)
             {
-                if ((i + 1) % (coder.getSize() / 80) == 0)
+                workers.push_back(std::thread([N,m,&touched,&coder,&result,&result_mut,coderSize,threadSize,threadCount,this]()
                 {
-                    // std::cout << "#";
-                    //std::cout << i << " / " << coder.getSize() <<  std::endl;
+                                std::vector<unsigned long long> path;
+                                GeNuSys::LinAlg::Vector<ElementType> Uz = hash.createCache();
+                                GeNuSys::LinAlg::Vector<ElementType> act[2] = { GeNuSys::LinAlg::Vector<ElementType>(N), GeNuSys::LinAlg::Vector<ElementType>(N) };
+                                const unsigned long long start = m * threadSize;
+                                const unsigned long long end = ((m == threadCount - 1) ? coderSize : start + threadSize);//jo ez igy?
+            for (unsigned long long i = start; i < end; ++i)
+            {
+                if (touched[i])
+                {
+                    continue;
                 }
 
+                path.clear();
+
+                coder.decode(i, act[0]);
+
+                unsigned long long idx = i;
+                path.push_back(idx);
+
+                bool valid = true;
+
+                int actIdx = 0;
+                do
+                {
+                    touched.set(idx);
+
+                    phi(act[actIdx], act[(actIdx + 1) % 2], Uz);
+                    actIdx = (actIdx + 1) % 2;
+
+                    idx = coder.encode(act[actIdx], valid);
+
+                    path.push_back(idx);
+                }
+                while (valid && !touched[idx]);
+
+                if (!valid)
+                {
+                    continue;
+                }
+
+                for (int j = path.size() - 2; j >= 0; --j)
+                {
+                    if (path[j] == path[path.size() - 1])
+                    {
+                        std::vector<GeNuSys::LinAlg::Vector<ElementType>> loop;
+                        GeNuSys::LinAlg::Vector<ElementType> vct(N);
+                        for (unsigned int k = j; k < path.size(); ++k)
+                        {
+                            coder.decode(path[k], vct);
+                            loop.push_back(vct);
+                        }
+
+                        std::lock_guard<std::mutex> res_guard(result_mut);
+                        result.push_back(loop);
+
+                        break;
+                    }
+                }
+            }
+                }));
+            }
+
+            for(auto& w: workers)
+            {
+                w.join();
+            }
+*/
+
+            for (unsigned long long i = 0; i < coderSize; ++i)
+            {
                 if (touched[i])
                 {
                     continue;
