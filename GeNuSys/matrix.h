@@ -80,6 +80,9 @@ namespace GeNuSys
 
                 Matrix(unsigned int rows, unsigned int cols);
 
+                template<typename SourceType>
+                Matrix(unsigned int rows, unsigned int cols, const std::vector<SourceType>& data);
+
                 Matrix(const Matrix<ElementType>& mat);
 
                 template<typename SourceType>

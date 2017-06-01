@@ -57,6 +57,20 @@ namespace GeNuSys
         }
 
         template<typename ElementType>
+        template<typename SourceType>
+        Matrix<ElementType>::Matrix(unsigned int rows, unsigned int cols, const std::vector<SourceType>& data): rows(rows), cols(cols), elem(rows * cols)
+        {
+            ASSERT_EXCEPTION(rows * cols == data.size(), std::length_error);
+            for(unsigned int r = 0; r < rows; ++r)
+            {
+                for(unsigned int c = 0; c < cols; ++c)
+                {
+                    set(r, c, data[rows*r+c]);
+                }
+            }
+        }
+
+        template<typename ElementType>
         Matrix<ElementType>::Matrix(unsigned int rows, unsigned int cols, int): rows(rows), cols(cols), elem(rows * cols)
         {
         }

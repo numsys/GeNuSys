@@ -103,6 +103,9 @@ namespace GeNuSys
 
                 SparseMatrix(unsigned int rows, unsigned int cols);
 
+                template<typename SourceType>
+                SparseMatrix(unsigned int rows, unsigned int cols, const std::vector<SourceType>& data);
+
                 SparseMatrix(const SparseMatrix<ElementType>& mat);
 
                 template<typename SourceType>
