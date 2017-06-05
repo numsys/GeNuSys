@@ -2,6 +2,8 @@ GeNuSys
 -------------
 C++ header-only library for computations with generalized number systems.
 
+License: GPLv3+
+
 Overview of functionality
 -------------
 #### Linear algebra
