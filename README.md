@@ -11,7 +11,7 @@ Overview of functionality
 * Decompositions and standard matrix forms
 
 #### Number systems
-* Computing digit sets: canonical, symmetric, adjoint, dense
+* Computing digit sets: j-canonical, j-symmetric, adjoint, dense
 * Construction of generalized number systems from a base matrix, digit set and norm (operator norm, frobenius norm or p-norm)
 * Computing cycles, orbits and expansions
 * Speeding up computations by reducing the volume which needs to be checked for periodic elements (using a heuristic to find integer similarity transforms)
