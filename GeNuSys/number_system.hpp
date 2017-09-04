@@ -83,31 +83,22 @@ namespace GeNuSys
             >
         std::vector<GeNuSys::LinAlg::Vector<ElementType>> NumberSystem<ElementType, VectorType, MatrixType, Norm>::getOrbit(const GeNuSys::LinAlg::Vector<ElementType>& z)
         {
-            std::vector<GeNuSys::LinAlg::Vector<ElementType>> result;
+            std::vector<VectorType<ElementType>> result;
 
             result.push_back(z);
 
-            if (GeNuSys::LinAlg::PNorm<00>::norm(result.back()) == ElementTraits<ElementType>::zero())
+            GeNuSys::LinAlg::Vector<ElementType> Uz = hash.createCache();
+            GeNuSys::LinAlg::Vector<ElementType> act[2] = { z, z };
+            int i = 0;
+            do
             {
-                return result;
+                phi(act[i], act[(i + 1) % 2], Uz);
+                result.push_back(act[(i + 1) % 2]);
+                i = (i + 1) % 2;
             }
+            while (GeNuSys::LinAlg::PNorm<00>::norm(act[i]) != ElementTraits<ElementType>::zero());
 
-            for (;;)
-            {
-                result.push_back(phi(result.back()));
-                if (GeNuSys::LinAlg::PNorm<00>::norm(result.back()) == ElementTraits<ElementType>::zero())
-                {
-                    return result;
-                }
-                for (size_t i = 0; i < result.size() - 1; ++i)
-                {
-                    if (result[i] == result.back())
-                    {
-                        result.pop_back();
-                        return result;
-                    }
-                }
-            }
+            return result;
         }
 
         template <
