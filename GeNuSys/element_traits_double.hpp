@@ -78,6 +78,14 @@ namespace GeNuSys
     }
 
     template<>
+    template<>
+    inline
+    long int ElementTraits<double>::asTypeUnsafe<long int>(const double& value)
+    {
+        return (long int)floor(value + 0.5);
+    }
+    
+    template<>
     inline
     double ElementTraits<double>::abs(const double& value)
     {

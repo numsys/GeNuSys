@@ -85,6 +85,14 @@ namespace GeNuSys
     }
 
     template<>
+    template<>
+    inline
+    long ElementTraits<long long>::asTypeUnsafe<long>(const long long& value)
+    {
+        return (long) value;
+    }
+    
+    template<>
     inline
     long long ElementTraits<long long>::abs(const long long& value)
     {

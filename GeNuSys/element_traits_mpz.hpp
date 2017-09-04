@@ -68,6 +68,21 @@ namespace GeNuSys
     template<>
     template<>
     inline
+    int ElementTraits<mpz_class>::asTypeUnsafe<int>(const mpz_class& value)
+    {
+        if (value.fits_sint_p())
+        {
+            return value.get_si();
+        }
+        else
+        {
+            throw std::out_of_range{"Conversion to int failed: out of range"};
+        }
+    }
+    
+    template<>
+    template<>
+    inline
     long int ElementTraits<mpz_class>::asTypeUnsafe<long int>(const mpz_class& value)
     {
         if (value.fits_slong_p())
@@ -80,6 +95,22 @@ namespace GeNuSys
         }
     }
 
+    template<>
+    template<>
+    inline
+    long int ElementTraits<mpz_class>::asType<long int>(const mpz_class& value)
+    {
+        return ElementTraits<mpz_class>::asTypeUnsafe<long int>(value);
+    }
+
+    template<>
+    template<>
+    inline
+    long long ElementTraits<mpz_class>::asType<long long>(const mpz_class& value)
+    {
+        return ElementTraits<mpz_class>::asTypeUnsafe<long int>(value);
+    }
+    
     template<>
     template<>
     inline
@@ -143,6 +174,14 @@ namespace GeNuSys
         return mpz_class(std::to_string(value));
     }
 
+    template<>
+    template<>
+    inline
+    mpz_class ElementTraits<long>::asType<mpz_class>(const long& value)
+    {
+        return mpz_class(value);
+    }
+    
     template<>
     template<>
     inline

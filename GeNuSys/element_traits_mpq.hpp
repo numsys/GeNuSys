@@ -37,6 +37,13 @@ namespace GeNuSys
         static const mpq_class one(1);
         return one;
     }
+    
+    template<>
+    inline
+    const mpq_class& ElementTraits<mpq_class>::epsilon()
+    {
+        ASSERT_EXCEPTION(!"INVALID_OPERATION", std::runtime_error);        
+    }
 
     template<>
     template<>
@@ -65,6 +72,14 @@ namespace GeNuSys
     template<>
     template<>
     inline
+    double ElementTraits<mpq_class>::asType<double>(const mpq_class& value)
+    {
+        return value.get_d();
+    }
+    
+    template<>
+    template<>
+    inline
     std::complex<mpf_class> ElementTraits<mpq_class>::asType<std::complex<mpf_class>>(const mpq_class& value)
     {
         return std::complex<mpf_class>(value, mpq_class(0));
@@ -79,6 +94,23 @@ namespace GeNuSys
         mpz_fdiv_q(result.get_mpz_t(), value.get_num_mpz_t(), value.get_den_mpz_t());
 
         return result;
+    }
+    
+    template<>
+    template<>
+    inline
+    int ElementTraits<mpq_class>::asTypeUnsafe<int>(const mpq_class& value)
+    {
+        mpz_class result;
+        mpz_fdiv_q(result.get_mpz_t(), value.get_num_mpz_t(), value.get_den_mpz_t());
+        if (result.fits_sint_p())
+        {
+            return result.get_si();
+        }
+        else
+        {
+            throw std::out_of_range{"Conversion to int failed: out of range"};
+        }
     }
 
     template<>

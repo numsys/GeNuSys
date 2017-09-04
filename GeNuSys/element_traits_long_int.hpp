@@ -47,6 +47,22 @@ namespace GeNuSys
     template<>
     template<>
     inline
+    long long ElementTraits<long int>::asType<long long>(const long int& value)
+    {
+        return value;
+    }
+    
+    template<>
+    template<>
+    inline
+    unsigned long ElementTraits<long>::asTypeUnsafe<unsigned long>(const long& value)
+    {
+        return (unsigned long) value;
+    }
+    
+    template<>
+    template<>
+    inline
     double ElementTraits<long int>::asType<double>(const long int& value)
     {
         return (double) value;
