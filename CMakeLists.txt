@@ -40,3 +40,6 @@ target_link_libraries(GeNuSys-example0 ${GMP_LIBRARIES})
 target_link_libraries(GeNuSys-example1 ${GMP_LIBRARIES})
 target_link_libraries(GeNuSys-tests ${GMP_LIBRARIES})
 target_link_libraries(GeNuSys-cyclotomic ${GMP_LIBRARIES})
+
+install(DIRECTORY ./GeNuSys/ DESTINATION include/GeNuSys FILES_MATCHING PATTERN "*.h")
+install(DIRECTORY ./GeNuSys/ DESTINATION include/GeNuSys FILES_MATCHING PATTERN "*.hpp")
