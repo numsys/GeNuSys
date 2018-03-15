@@ -36,3 +36,7 @@ dissertation, 2001, 1–98.](http://compalg.inf.elte.hu/~attila/pub/phd.ps)
 * Matula, D. W.: Basic digit sets for radix representation. Journal of the ACM (JACM). 29, 1982, 1131–1143.
 
 [10_genusys.pdf](10_genusys.pdf) contains a detailed description of the library and the implemented algorithms (in hungarian).
+
+Build options
+-------------
+To disable threading, define the GENUSYS_NO_THREADING macro before including GeNuSys headers.

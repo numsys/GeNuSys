@@ -9,6 +9,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
 
 find_package(GMP)
 find_package(GeNuSys REQUIRED)
+find_package(Threads) #Not required if threading is disabled by defining the GENUSYS_NO_THREADING macro
 
 include_directories(${GeNuSys_INCLUDE_DIRS})
 
@@ -36,10 +37,10 @@ add_executable(GeNuSys-example0 ${example0_SRCS})
 add_executable(GeNuSys-example1 ${example1_SRCS})
 add_executable(GeNuSys-tests ${test_SRCS})
 add_executable(GeNuSys-cyclotomic ${cyclotomic_SRCS})
-target_link_libraries(GeNuSys-example0 ${GMP_LIBRARIES})
-target_link_libraries(GeNuSys-example1 ${GMP_LIBRARIES})
-target_link_libraries(GeNuSys-tests ${GMP_LIBRARIES})
-target_link_libraries(GeNuSys-cyclotomic ${GMP_LIBRARIES})
+target_link_libraries(GeNuSys-example0 ${GMP_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(GeNuSys-example1 ${GMP_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(GeNuSys-tests ${GMP_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(GeNuSys-cyclotomic ${GMP_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 
 install(DIRECTORY ./GeNuSys/ DESTINATION include/GeNuSys FILES_MATCHING PATTERN "*.h")
 install(DIRECTORY ./GeNuSys/ DESTINATION include/GeNuSys FILES_MATCHING PATTERN "*.hpp")
