@@ -2,3 +2,10 @@
 .directory
 build
 *.user
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
+Makefile
+GeNuSys-test*
+GeNuSys-example*
+GeNuSys-cyclotomic
